@@ -1,0 +1,36 @@
+
+@startuml
+skinparam componentStyle uml1
+
+database "players"
+
+[PlayerJpaRepository] --("players"
+
+save --[PlayerJpaRepository]
+getReferenceById --[PlayerJpaRepository]
+findByUsernameOrEmail --[PlayerJpaRepository]
+findByUsernameAndPassword --[PlayerJpaRepository]
+findByEmailAndPassword --[PlayerJpaRepository]
+[PlayerService] --(findByUsernameOrEmail
+[PlayerService] --(findByUsernameAndPassword
+[PlayerService] --(findByEmailAndPassword
+[PlayerService] --(save
+[PlayerService] --(getReferenceById
+
+
+getPlayerById -- [PlayerService]
+savePlayer --[PlayerService]
+[PlayerController] --(getPlayerById
+[PlayerController] --(savePlayer
+
+
+getPlayerByUserNameAndPassword -- [PlayerService]
+getPlayerByEmailAndPassword --[PlayerService]
+[LoginService] --(getPlayerByUserNameAndPassword
+[LoginService] --(getPlayerByEmailAndPassword
+
+login -- [LoginService]
+[LoginController] --(login
+
+@enduml
+--
